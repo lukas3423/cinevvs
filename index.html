@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineVerse — Filmes e Séries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-content">
+    <a href="#" class="logo" onclick="App.goHome()">Cine<span>Verse</span></a>
+    <div class="nav-links">
+      <a href="#" class="active" onclick="App.goHome()">Início</a>
+      <a href="#">Filmes</a>
+      <a href="#">Séries</a>
+      <a href="#" onclick="App.showMyList()">Minha Lista</a>
+    </div>
+    <div class="search-box" id="search-box">
+      <input type="text" id="search-input" placeholder="Buscar filmes..." oninput="App.search(this.value)" />
+      <button class="search-btn" onclick="App.toggleSearch()">🔍</button>
+    </div>
+    <div id="user-area"></div>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-badge">Em Destaque</span>
+    <h1 id="hero-title">Carregando...</h1>
+    <p id="hero-desc"></p>
+    <div class="hero-actions">
+      <button class="btn-play" onclick="App.playHeroMovie()">
+        ▶ Assistir
+      </button>
+      <button class="btn-info" id="btn-hero-info" onclick="App.showHeroInfo()">
+        Mais Informações
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+  <div class="loading" id="initial-loading">
+    <div class="spinner"></div>
+    <p>Carregando catálogo...</p>
+  </div>
+</main>
+
+<div class="modal-overlay" id="modal-overlay" onclick="App.closeModal()"></div>
+<div class="modal" id="modal">
+  <button class="modal-close" onclick="App.closeModal()">&times;</button>
+  <div id="modal-body"></div>
+</div>
+
+<div class="player-overlay" id="player-overlay">
+  <div class="player-content">
+    <div class="player-header">
+      <h2 id="player-title"></h2>
+      <button class="player-close" onclick="App.closePlayer()">&times;</button>
+    </div>
+    <div class="player-screen" id="player-screen"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
