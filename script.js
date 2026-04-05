@@ -460,7 +460,51 @@ const App = {
     }, 400);
   },
 
+  setActiveNav(name) {
+    document.querySelectorAll(".nav-links a").forEach((a) => a.classList.remove("active"));
+    const el = document.getElementById(`nav-${name}`);
+    if (el) el.classList.add("active");
+  },
+
+  async loadCategoryPage(title, fetchFn) {
+    const main = document.getElementById("main-content");
+    document.getElementById("search-results").style.display = "none";
+    document.getElementById("search-input").value = "";
+    main.innerHTML = `<div class="loading"><div class="spinner"></div><p>Carregando ${title}...</p></div>`;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    try {
+      const movies = await fetchFn();
+      let html = `<h2 class="category-title" style="padding:0 2rem;margin-top:6rem">${title}</h2>`;
+      html += `<div class="grid-grid">`;
+      movies.forEach((m) => { html += this.cardHTML(m); });
+      html += `</div>`;
+      main.innerHTML = html;
+    } catch (err) {
+      main.innerHTML = `<div class="error-container" style="padding-top:8rem"><p>Erro ao carregar ${title}</p><p class="error-detail">${err.message}</p></div>`;
+    }
+  },
+
+  showMovies() {
+    this.setActiveNav("movies");
+    this.loadCategoryPage("Filmes", async () => {
+      const d = await tmdb.fetch("/movie/popular");
+      return d.results || [];
+    });
+    return false;
+  },
+
+  showSeries() {
+    this.setActiveNav("series");
+    this.loadCategoryPage("Séries", async () => {
+      const d = await tmdb.fetch("/tv/popular");
+      return d.results || [];
+    });
+    return false;
+  },
+
   goHome() {
+    this.setActiveNav("home");
     document.getElementById("search-results").style.display = "none";
     document.getElementById("search-input").value = "";
     this.loadHome();

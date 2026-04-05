@@ -14,10 +14,10 @@
   <div class="nav-content">
     <a href="#" class="logo" onclick="App.goHome()">Cine<span>Verse</span></a>
     <div class="nav-links">
-      <a href="#" class="active" onclick="App.goHome()">Início</a>
-      <a href="#">Filmes</a>
-      <a href="#">Séries</a>
-      <a href="#" onclick="App.showMyList()">Minha Lista</a>
+      <a href="#" class="active" id="nav-home" onclick="App.goHome()">Início</a>
+      <a href="#" id="nav-movies" onclick="App.showMovies()">Filmes</a>
+      <a href="#" id="nav-series" onclick="App.showSeries()">Séries</a>
+      <a href="#" id="nav-mylist" onclick="App.showMyList()">Minha Lista</a>
     </div>
     <div class="search-box" id="search-box">
       <input type="text" id="search-input" placeholder="Buscar filmes..." oninput="App.search(this.value)" />
